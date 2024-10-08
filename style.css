@@ -2,10 +2,13 @@
     width: 960px;
     height: 960px;
 
+/*
     max-width: 960px;
     min-width: 960px;
+*/
     max-height: 960px;
     min-height: 960px;
+
     background-color: lightcoral;
 
     display: flex;
@@ -13,11 +16,9 @@
 }
 
 .child-div {
-    background-color: rgb(114, 229, 72);
+    background-color: rgb(72, 132, 229);
     width: 58px;
     height: 58px;
-
     border: 1px solid black;
     min-width: 58px;
-    
 }
