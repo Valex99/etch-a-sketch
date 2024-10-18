@@ -2,6 +2,7 @@ const sketchpad = document.querySelector(".sketchpad-section");
 const createGridButton = document.querySelector(".custom-grid");
 const clear = document.querySelector(".clear");
 const rainbow = document.querySelector(".rainbow");
+const eraser = document.querySelector(".eraser");
 
 // Create grid 16x16 function
 function createDefaultGrid() {
@@ -16,7 +17,7 @@ function createDefaultGrid() {
   const allDefaultSquares = document.querySelectorAll(".default-square");
   allDefaultSquares.forEach((defaultSquare) => {
     defaultSquare.addEventListener("mouseenter", () => {
-      defaultSquare.style.backgroundColor = "gray";
+      defaultSquare.style.backgroundColor = "black";
     });
   });
 }
@@ -37,13 +38,14 @@ createGridButton.addEventListener("click", function () {
 clear.addEventListener("click", function () {
   deleteGrid();
   // This will have to be modified (default grid or custom?)
-  createDefaultGrid();
+  //createDefaultGrid();
+  createCustomGrid(16);
 });
 
 // Function for creating new custom grid
 function createCustomGrid(newGrid) {
   let widthSingleElement = 1296 / newGrid;
-  let heightSingleElement = 862 / newGrid;
+  let heightSingleElement = 865 / newGrid;
 
   for (let i = 0; i < newGrid; i++) {
     for (let j = 0; j < newGrid; j++) {
@@ -51,8 +53,7 @@ function createCustomGrid(newGrid) {
       newSquare.classList.add("new-square");
       newSquare.style.width = widthSingleElement + "px";
       newSquare.style.height = heightSingleElement + "px";
-      newSquare.style.border = "1px solid black";
-      newSquare.style.backgroundColor = "lightgreen";
+      //newSquare.style.border = "1px solid black";
       sketchpad.appendChild(newSquare);
     }
   }
@@ -64,16 +65,35 @@ function stylingNewGrid() {
   allNewSquares.forEach((newSquare) => {
     newSquare.addEventListener("mouseenter", () => {
       // Create a variable here - user input
-      newSquare.style.backgroundColor = "orange";
+      newSquare.style.backgroundColor = "black";
     });
   });
 }
 
-
+// Implement rainbow function
 rainbow.addEventListener("click", function () {
+  const allNewSquares = document.querySelectorAll(".new-square");
+  // Instead of a variable - let it call the math function
+  allNewSquares.forEach((newSquare) => {
+    newSquare.addEventListener("mouseenter", () => {
+      // Generate random RGB values
+      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, 
+                              ${Math.floor(Math.random() * 256)}, 
+                              ${Math.floor(Math.random() * 256)})`;
 
+      newSquare.style.backgroundColor = randomColor;
+    });
+  });
+});
 
-
+// Eraser
+eraser.addEventListener("click", function () {
+  const allNewSquares = document.querySelectorAll(".new-square");
+  allNewSquares.forEach((newSquare) => {
+    newSquare.addEventListener("mouseenter", () => {
+      newSquare.style.backgroundColor = "white";
+    });
+  });
 });
 
 function deleteGrid() {
