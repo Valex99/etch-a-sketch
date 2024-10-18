@@ -3,6 +3,9 @@ const createGridButton = document.querySelector(".custom-grid");
 const clear = document.querySelector(".clear");
 const rainbow = document.querySelector(".rainbow");
 const eraser = document.querySelector(".eraser");
+const opacity = document.querySelector(".opacity");
+
+
 
 // Create grid 16x16 function
 function createDefaultGrid() {
@@ -32,6 +35,8 @@ createGridButton.addEventListener("click", function () {
   } while (newGrid <= 0 || newGrid > 100);
   deleteGrid();
   createCustomGrid(newGrid);
+
+  // return newGrid =
 });
 
 // Clear grid button
@@ -96,8 +101,23 @@ eraser.addEventListener("click", function () {
   });
 });
 
+// Opacity
+opacity.addEventListener("click", function() {
+    const allNewSquares = document.querySelectorAll(".new-square");
+
+    allNewSquares.forEach((newSquare) => {
+        let startingOpacity = 0.0;
+        newSquare.addEventListener("mouseenter", () => {
+            startingOpacity += 0.1;
+
+            newSquare.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${startingOpacity})` 
+        })
+    })
+});
+
 function deleteGrid() {
   while (sketchpad.firstChild) {
     sketchpad.removeChild(sketchpad.firstChild);
   }
 }
+// Opacity fixed
