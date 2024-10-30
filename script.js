@@ -1,56 +1,18 @@
+// Code in SANDBOX
 const sketchpad = document.querySelector(".sketchpad-section");
 const createGridButton = document.querySelector(".custom-grid");
-const clear = document.querySelector(".clear");
 const rainbow = document.querySelector(".rainbow");
 const eraser = document.querySelector(".eraser");
 const opacity = document.querySelector(".opacity");
+const clear = document.querySelector(".clear");
 
-
-
-// Create grid 16x16 function
-function createDefaultGrid() {
-  for (let i = 0; i < 16; i++) {
-    for (let j = 0; j < 16; j++) {
-      const defaultSquare = document.createElement("div");
-      defaultSquare.classList.add("default-square");
-      sketchpad.appendChild(defaultSquare);
-    }
-  }
-  // Select every element on 16x16 grid
-  const allDefaultSquares = document.querySelectorAll(".default-square");
-  allDefaultSquares.forEach((defaultSquare) => {
-    defaultSquare.addEventListener("mouseenter", () => {
-      defaultSquare.style.backgroundColor = "black";
-    });
-  });
-}
-// Function call for default grid to be created
-createDefaultGrid();
-
-//  Get input from the user for custom grid
-createGridButton.addEventListener("click", function () {
-  let newGrid;
-  do {
-    newGrid = parseInt(prompt("Enter the number of squares per side: "));
-  } while (newGrid <= 0 || newGrid > 100);
-  deleteGrid();
-  createCustomGrid(newGrid);
-
-  // return newGrid =
-});
-
-// Clear grid button
-clear.addEventListener("click", function () {
-  deleteGrid();
-  // This will have to be modified (default grid or custom?)
-  //createDefaultGrid();
-  createCustomGrid(16);
-});
+// Starting / default grid size
+let gridSize = 50;
 
 // Function for creating new custom grid
 function createCustomGrid(newGrid) {
-  let widthSingleElement = 1296 / newGrid;
-  let heightSingleElement = 865 / newGrid;
+  let widthSingleElement = 1295 / newGrid;
+  let heightSingleElement = 865 / newGrid; //866
 
   for (let i = 0; i < newGrid; i++) {
     for (let j = 0; j < newGrid; j++) {
@@ -65,6 +27,7 @@ function createCustomGrid(newGrid) {
   stylingNewGrid();
 }
 
+// Default mode
 function stylingNewGrid() {
   const allNewSquares = document.querySelectorAll(".new-square");
   allNewSquares.forEach((newSquare) => {
@@ -75,23 +38,38 @@ function stylingNewGrid() {
   });
 }
 
-// Implement rainbow function
+createCustomGrid(gridSize);
+
+// CUSTOM GRID BUTTON
+createGridButton.addEventListener("click", function () {
+  do {
+    gridSize = parseInt(prompt("Enter the number of squares per side: "));
+  } while (gridSize <= 0 || gridSize > 100);
+  userInput = gridSize;
+  console.log(userInput);
+  deleteGrid();
+  createCustomGrid(gridSize);
+});
+
+// RAINBOW BUTTON - Maybe add option to clear grid before implementing this
 rainbow.addEventListener("click", function () {
+  deleteGrid();
+  createCustomGrid(gridSize);
   const allNewSquares = document.querySelectorAll(".new-square");
-  // Instead of a variable - let it call the math function
   allNewSquares.forEach((newSquare) => {
     newSquare.addEventListener("mouseenter", () => {
       // Generate random RGB values
       const randomColor = `rgb(${Math.floor(Math.random() * 256)}, 
-                              ${Math.floor(Math.random() * 256)}, 
-                              ${Math.floor(Math.random() * 256)})`;
+                                ${Math.floor(Math.random() * 256)}, 
+                                ${Math.floor(Math.random() * 256)})`;
 
       newSquare.style.backgroundColor = randomColor;
+      // If other button is clicked - reset color
     });
   });
 });
 
-// Eraser
+// ERASER BUTTON
 eraser.addEventListener("click", function () {
   const allNewSquares = document.querySelectorAll(".new-square");
   allNewSquares.forEach((newSquare) => {
@@ -101,23 +79,31 @@ eraser.addEventListener("click", function () {
   });
 });
 
-// Opacity
-opacity.addEventListener("click", function() {
-    const allNewSquares = document.querySelectorAll(".new-square");
+// OPACITY BUTTON
+opacity.addEventListener("click", function () {
+  deleteGrid();
+  createCustomGrid(gridSize);
+  const allNewSquares = document.querySelectorAll(".new-square");
 
-    allNewSquares.forEach((newSquare) => {
-        let startingOpacity = 0.0;
-        newSquare.addEventListener("mouseenter", () => {
-            startingOpacity += 0.1;
+  allNewSquares.forEach((newSquare) => {
+    let startingOpacity = 0.0;
+    newSquare.addEventListener("mouseenter", () => {
+      startingOpacity += 0.1;
 
-            newSquare.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${startingOpacity})` 
-        })
-    })
+      newSquare.style.backgroundColor = `rgb(${0}, ${0}, ${0}, ${startingOpacity})`;
+    });
+  });
 });
 
+// CLEAR BUTTON
+clear.addEventListener("click", function () {
+  deleteGrid();
+  createCustomGrid(gridSize);
+});
+
+// Delete Grid Function
 function deleteGrid() {
   while (sketchpad.firstChild) {
     sketchpad.removeChild(sketchpad.firstChild);
   }
 }
-// Opacity fixed

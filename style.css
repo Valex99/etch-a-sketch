@@ -2,52 +2,55 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     display: flex;
     align-items: center;
     flex-shrink: 0;
     justify-content: space-between;
     padding: 40px;
-}
-
-.menu-section {
+  }
+  
+  .menu-section {
     width: 450px;
-}
-
-.sketchpad-section {
+  }
+  
+  .sketchpad-section {
     width: 1298px;
     height: 866px;
     flex-shrink: 0;
-
+  
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
-}
-
-.default-square {
+  }
+  
+  .default-square {
     background-color: rgb(255, 255, 255);
     width: 81px;
     height: 54px;
-}
-
-.button-div {
+  }
+  
+  .button-div {
     width: 100%;
     height: 20%;
     padding: 20px;
     display: flex;
     justify-content: center;
-}
-
-.btn {
+  }
+  
+  .btn {
     width: 80%;
     border: 3px solid silver;
     border-radius: 10px;
     height: 40px;
-}
 
-h1 {
+    min-width: 200px;
+  }
+  
+  h1 {
     text-align: center;
     padding: 20px;
-}
+  }
+  
